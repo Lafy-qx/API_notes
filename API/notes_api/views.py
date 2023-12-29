@@ -1,5 +1,6 @@
 from .serializers import *
 from .models import *
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import generics
 
@@ -7,6 +8,7 @@ from rest_framework import generics
 class NoteList(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerealizer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = super(NoteList,self).get_queryset().order_by('-id')
